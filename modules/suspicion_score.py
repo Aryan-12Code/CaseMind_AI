@@ -5,6 +5,7 @@ Analyzes processed evidence to assign a risk/suspicion score to detected persons
 """
 
 from modules.database import get_all_evidence, get_processed_by_evidence_id
+from modules.entity_normalizer import resolve_duplicates
 
 
 def generate_suspicion_scores() -> list[dict]:
@@ -36,6 +37,21 @@ def generate_suspicion_scores() -> list[dict]:
             
             person_data[person]["files"].add(evidence["filename"])
             person_data[person]["text_context"].append(raw_text)
+
+    # Resolve person variants globally to merge stats (e.g. "Rahul" and "Rahul Sharma")
+    all_persons = list(person_data.keys())
+    resolved_map = resolve_duplicates(all_persons)
+    
+    merged_person_data = {}
+    for raw_name, data in person_data.items():
+        canonical_name = resolved_map.get(raw_name, raw_name)
+        if canonical_name not in merged_person_data:
+            merged_person_data[canonical_name] = {"files": set(), "text_context": []}
+        
+        merged_person_data[canonical_name]["files"].update(data["files"])
+        merged_person_data[canonical_name]["text_context"].extend(data["text_context"])
+        
+    person_data = merged_person_data
 
     # Calculate scores
     results = []

@@ -5,10 +5,12 @@ Provides functions to generate dynamic, interactive charts based
 on live database metrics and processed evidence data.
 """
 
-import plotly.express as px
-import pandas as pd
 from collections import Counter
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 from modules.database import get_all_evidence, get_processed_by_evidence_id
+from modules.entity_normalizer import resolve_duplicates
 
 
 def _get_all_entities_and_keywords() -> tuple[dict, dict]:
@@ -44,6 +46,12 @@ def _get_all_entities_and_keywords() -> tuple[dict, dict]:
             keywords = processed.get("keywords", {})
             for k in agg_keywords:
                 agg_keywords[k].extend(keywords.get(k, []))
+                
+    # Globally resolve duplicate entities across all evidence
+    for k in agg_entities:
+        if agg_entities[k]:
+            resolved_map = resolve_duplicates(agg_entities[k])
+            agg_entities[k] = [resolved_map.get(e, e) for e in agg_entities[k]]
                 
     return agg_entities, agg_keywords
 
