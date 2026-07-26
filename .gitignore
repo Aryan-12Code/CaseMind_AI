@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# CaseMind AI Specific Ignore Rules
+# Do not upload the databases as they contain sensitive evidence!
+database/cases/
+database/*.db
+
+# Do not upload raw evidence files
+uploads/
+
+# OS generated files
+.DS_Store
+Thumbs.db

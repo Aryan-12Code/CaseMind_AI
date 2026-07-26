@@ -1,0 +1,15 @@
+streamlit
+streamlit-option-menu
+groq
+spacy
+easyocr
+pdfplumber
+pandas
+networkx
+pyvis
+fpdf2
+openpyxl
+kaleido
+numpy
+plotly
+python-dateutil
