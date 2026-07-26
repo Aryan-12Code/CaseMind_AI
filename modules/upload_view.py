@@ -132,9 +132,10 @@ def _process_uploads(uploaded_files: list) -> None:
             if proc_status == "Completed" and raw_text:
                 keywords = extract_keywords(raw_text)
                 try:
-                    entities = extract_entities(raw_text)
+                    api_key = st.session_state.get("groq_api_key", "")
+                    entities = extract_entities(raw_text, api_key)
                 except Exception:
-                    entities = {}  # Graceful fallback if spaCy fails
+                    entities = {}  # Graceful fallback if extraction fails
 
             # ── Step 4: Store processed results ──────────────────────────────
             processed_time = datetime.now().strftime("%Y-%m-%d %I:%M %p")
