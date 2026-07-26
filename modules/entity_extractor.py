@@ -23,17 +23,10 @@ def _get_nlp():
     """
     try:
         import spacy
-        try:
-            return spacy.load("en_core_web_sm")
-        except OSError:
-            import spacy.cli
-            # Suppress output during download to keep logs clean
-            spacy.cli.download("en_core_web_sm")
-            return spacy.load("en_core_web_sm")
-    except ImportError:
+        return spacy.load("en_core_web_sm")
+    except OSError:
         return None
-    except Exception as e:
-        print(f"Failed to load or download spaCy model: {e}")
+    except ImportError:
         return None
 
 
