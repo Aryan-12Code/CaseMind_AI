@@ -41,7 +41,3 @@ def render() -> None:
     ### 🔒 Security & Privacy
     All evidence processing occurs strictly within isolated case environments. Raw text and extracted entities are stored locally in the case-specific SQLite database. Text from your evidence is sent to the Groq API only for entity extraction, AI chat, summaries and insights.
     """)
-    
-    ### 🔒 Security & Privacy
-    All evidence processing occurs strictly within isolated case environments. Raw text and extracted entities are stored locally in the case-specific SQLite database. Data is only sent to the configured AI provider during active querying or summary generation.
-    """)
