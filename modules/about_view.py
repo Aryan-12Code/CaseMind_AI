@@ -25,17 +25,22 @@ def render() -> None:
     **Frontend & UI**
     - Streamlit (Core framework)
     - Plotly (Interactive analytics)
-    - PyVis & NetworkX (Relationship graphing)
+    - streamlit-option-menu (Navigation)
     
     **Backend & Storage**
     - Python 3.10+
     - Streamlit (Frontend & State Management)
+    - SQLite (Case storage)
     - Groq Engine (Generative AI)
-    - spaCy (NLP & Entity Extraction)
+    - Groq LLM (Llama 3.3 70B) for Entity Extraction
     - EasyOCR (Optical Character Recognition)
     - pdfplumber (PDF text extraction)
     
     ---
+    
+    ### 🔒 Security & Privacy
+    All evidence processing occurs strictly within isolated case environments. Raw text and extracted entities are stored locally in the case-specific SQLite database. Text from your evidence is sent to the Groq API only for entity extraction, AI chat, summaries and insights.
+    """)
     
     ### 🔒 Security & Privacy
     All evidence processing occurs strictly within isolated case environments. Raw text and extracted entities are stored locally in the case-specific SQLite database. Data is only sent to the configured AI provider during active querying or summary generation.
