@@ -15,6 +15,7 @@ import streamlit as st
 from groq import Groq
 
 from modules.entity_normalizer import clean_entity_name
+from modules.ai_engine import GROQ_MODEL
 
 def extract_entities(text: str, api_key: str = None) -> dict[str, list[str]]:
     """
@@ -65,7 +66,7 @@ Text:
 """
         
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0,
             response_format={"type": "json_object"}
@@ -99,6 +100,7 @@ Text:
         
     except Exception as e:
         print(f"Groq Entity extraction failed: {e}")
+        st.warning(f"Entity extraction failed ({GROQ_MODEL}): {e}")
         return empty_result
 
 
