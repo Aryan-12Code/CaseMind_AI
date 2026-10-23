@@ -32,7 +32,7 @@ def render() -> None:
     - Streamlit (Frontend & State Management)
     - SQLite (Case storage)
     - Groq Engine (Generative AI)
-    - Groq LLM (Llama 3.3 70B) for Entity Extraction
+    - Groq LLM (GPT-OSS 120B) for Entity Extraction
     - EasyOCR (Optical Character Recognition)
     - pdfplumber (PDF text extraction)
     
