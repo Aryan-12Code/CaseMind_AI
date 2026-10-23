@@ -7,6 +7,7 @@ ONLY the provided evidence context.
 """
 
 import json
+import os
 from typing import Optional
 import streamlit as st
 import groq
@@ -79,7 +80,9 @@ INSIGHTS_SYSTEM_PROMPT = """You are CaseMind AI. Analyze the evidence and return
 Base this ONLY on the provided evidence. If a field cannot be determined, use "Not found" for string values and 0 for numbers.
 """
 
-GROQ_MODEL = "llama-3.3-70b-versatile"
+# llama-3.3-70b-versatile was retired by Groq on 16 Aug 2026 (free/developer tiers).
+# Override with the GROQ_MODEL environment variable if Groq changes its lineup again.
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 
 
 def test_connection(api_key: str) -> tuple[bool, str]:
